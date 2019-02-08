@@ -1,5 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: "./src/index.js",
@@ -19,6 +21,19 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true,
+              disable: true, 
+            },
+          },
+        ],
       }
     ]
   },
@@ -32,7 +47,20 @@ module.exports = {
     contentBase: path.join(__dirname, "public/"),
     port: 3000,
     publicPath: "http://localhost:3000/dist/",
-    hotOnly: true
+    hotOnly: true,
+    historyApiFallback: true
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  plugins: [new Dotenv({
+    path: './.env',
+    safe: false,
+    systemvars: false,
+    silent: false,
+    expand: false,
+    defaults: false
+  }),
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      template:'public/index.html'
+    })]
+  
 };
