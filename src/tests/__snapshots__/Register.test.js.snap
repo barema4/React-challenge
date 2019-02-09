@@ -22,6 +22,7 @@ ShallowWrapper {
     "props": Object {
       "children": <div
         className="container"
+        id="registration-container"
       >
         <div
           className="row"
@@ -148,6 +149,7 @@ ShallowWrapper {
           </div>
         </div>,
         "className": "container",
+        "id": "registration-container",
       },
       "ref": null,
       "rendered": Object {
@@ -487,6 +489,7 @@ ShallowWrapper {
       "props": Object {
         "children": <div
           className="container"
+          id="registration-container"
         >
           <div
             className="row"
@@ -613,6 +616,7 @@ ShallowWrapper {
             </div>
           </div>,
           "className": "container",
+          "id": "registration-container",
         },
         "ref": null,
         "rendered": Object {
