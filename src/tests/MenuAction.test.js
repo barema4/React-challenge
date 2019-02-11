@@ -1,16 +1,11 @@
 import { getMenu } from '../actions/MenuAction';
 import fetchMock from 'fetch-mock';
-import Enzyme from 'enzyme';
 import configureMockStore from 'redux-mock-store';
-import EnzymeAdapter from 'enzyme-adapter-react-16';
 import thunk from 'redux-thunk';
-
-Enzyme.configure({ adapter: new EnzymeAdapter() });
 
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
 const API_HOST_URL = process.env.API_URL;
-
 it.only('test get_menu', () => {
     
     const url = `${API_HOST_URL}/v2/menu`;

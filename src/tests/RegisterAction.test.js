@@ -1,11 +1,8 @@
 import { registerUser } from '../actions/AuthActions';
 import fetchMock from 'fetch-mock';
-import Enzyme from 'enzyme';
 import configureMockStore from 'redux-mock-store';
-import EnzymeAdapter from 'enzyme-adapter-react-16';
 import thunk from 'redux-thunk';
 
-Enzyme.configure({ adapter: new EnzymeAdapter() });
 
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
