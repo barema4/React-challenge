@@ -19,7 +19,23 @@
     margin-left: 25%;
   }
 
-  
+  #registration-container .header h1 {
+    font-size: 1.5rem;
+  }
 
+  #registration-container .header form {
+    margin-bottom: 1rem;
+  }
+
+  .card{
+    text-align: center;
+  }
+
+  
+footer{
+  bottom: 0px;
+  width: 97%;
+  position: absolute;
+}
   
   

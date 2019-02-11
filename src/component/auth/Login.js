@@ -51,7 +51,7 @@ export class Login extends Component {
         <div className="container" id="registration-container">
           <div className="row">
             <div className="header">
-              <h3 className="display-4 text-center">Welcome Fast Food Fast</h3>
+              <h3 className="display-5 text-center">Welcome Fast Food Fast</h3>
               <form noValidate onSubmit={this.onSubmit}>
                 <span>{notFoundUser}</span>
                 <div className="form-group">
