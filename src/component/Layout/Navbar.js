@@ -17,7 +17,7 @@ class Navbar extends Component {
       let postItems;
       if (menu){
        postItems = menu.map(post => (
-        <div className="card m-lg-2" key={post.id}>
+        <div className="card" key={post.id}>
         <div className="card-body"></div>
         <h3 className="card-title">{post.item}</h3>
         <p>UGX {post.price}</p>  

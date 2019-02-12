@@ -23,7 +23,7 @@ export class Register extends Component {
       this.setState({ errors: nextProps.errors });
     }
     if (nextProps.errors.message == "Account created successfully") {
-      window.location.href = '/login';
+      window.location.href = '/';
     }
   }
   onChange(e) {
