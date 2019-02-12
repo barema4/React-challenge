@@ -44,12 +44,4 @@ describe('<Login/>', () => {
     expect(instance.state.name).toEqual('value');
   });
 
-  it('tests that the component receives new props', () => {
-    const wrapper = shallow(<Login {...props} />);
-    const data = {
-      errors: { error: ' ' }
-    };
-    wrapper.instance().componentWillReceiveProps(data);
-    expect(wrapper.instance().state.notFoundUser).toEqual(' ');
-  });
 });

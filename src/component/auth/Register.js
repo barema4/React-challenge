@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component,Fragment } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/AuthActions';
+import 'msg-notify/dist/notify.css';
+import notify from 'msg-notify'
 
 export class Register extends Component {
   constructor() {
@@ -11,25 +13,29 @@ export class Register extends Component {
       user_name: '',
       email: '',
       password: '',
-      errors: {}
+      errors: {},
+      loader:{loading: true}
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-
   componentWillReceiveProps(nextProps) {
 
     if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+      this.setState({ errors: nextProps.errors, loader: {loading: false}});
     }
-    if (nextProps.errors.message == "Account created successfully") {
-      window.location.href = '/';
+    if (nextProps.errors.message === "Account created successfully") {
+      const { history } = this.props
+      notify('Account created sucessfuly', 'success')
+      history.push('/')
+       
+    } else {
+      notify('Account could not be created ,please check your input data', 'error');
     }
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-
   onSubmit(e) {
     e.preventDefault();
     const newUser = {
@@ -38,14 +44,14 @@ export class Register extends Component {
       password: this.state.password
     };
     this.props.registerUser(newUser),
-      this.setState({ user_name: '', email: '', password: '' });
+      this.setState({ user_name: '', email: '', password: '', loader: {loading: true} });
   }
-
   render() {
-    const { errors } = this.state;
+    const { errors, loader } = this.state;
 
     return (
       <section id="register" className="flex-grow-1">
+      
         <div className="container" id="registration-container">
           <div className="row">
             <div className="header">
@@ -85,15 +91,15 @@ export class Register extends Component {
                   <input
                     type="password"
                     className={classnames('form-control form-control-lg', {
-                      'is-invalid': errors.password
+                      'is-invalid': errors.Password
                     })}
                     placeholder="Password"
                     name="password"
                     value={this.state.password}
                     onChange={this.onChange}
                   />
-                  {errors.password && (
-                    <div className="invalid-feedback">{errors.password}</div>
+                  {errors.Password && (
+                    <div className="invalid-feedback">{errors.Password}</div>
                   )}
                 </div>
                 <input
@@ -104,11 +110,10 @@ export class Register extends Component {
             </div>
           </div>
         </div>
-      </section>
+      </section> 
     );
   }
 }
-
 Register.propType = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,

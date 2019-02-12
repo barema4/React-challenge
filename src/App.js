@@ -4,15 +4,12 @@ import Register from './component/auth/Register';
 import Login from './component/auth/Login';
 import Navbar from './component/Layout/Navbar';
 import'./App.css';
-import './App.scss';
 
 class App extends Component {
   render() {
     return (
       <div>
-      
       <Router>
-      
       <div className="App">
         <Route exact path="/menu" component={Navbar}/>
         <Route exact path="/register" component={Register} />
