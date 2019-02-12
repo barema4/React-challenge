@@ -18,7 +18,6 @@ export const registerUser = userData => dispatch => {
         });
     });
 };
-
 export const loginUser = (userData, history) => dispatch => {
   return fetch(`${API_HOST_URL}/v2/auth/login`, {
     method: 'POST',
@@ -33,9 +32,10 @@ export const loginUser = (userData, history) => dispatch => {
       if (data.errors) {
         return dispatch({
           type: GET_ERRORS,
-          payload: data.errors
+          payload: data
         });
-      } else {
+      } 
+      else {
         let token = data.access_token;
 
         localStorage.setItem('access_token', token);
@@ -43,10 +43,10 @@ export const loginUser = (userData, history) => dispatch => {
 
         if (userType == 'true') {
           history.push('/admin');
-        } else if (userType == 'FALSE') {
+        } 
+        else if (userType == 'FALSE') {
           history.push('/menu');
         }
-
         return true;
       }
     });

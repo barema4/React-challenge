@@ -5,30 +5,22 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { loginUser } from '../../actions/AuthActions';
 
-
 export class Login extends Component {
   constructor() {
     super();
     this.state = {
       email: '',
       password: '',
-      emailError: '',
-      passwordError: '',
-      notFoundUser: ''
+      errors:{}
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
-      if (nextProps.errors.email) {
-        this.setState({ emailError: nextProps.errors.email });
-      } else if (nextProps.errors.password) {
-        this.setState({ passwordError: nextProps.errors.password });
-      } else {
-        this.setState({ notFoundUser: nextProps.errors.error });
-      }
-    } else {
+      this.setState({ errors: nextProps.errors})
+    }
+    else {
       window.localStorage.setItem('token', loginUser.nextProps.user.token);
     }
   }
@@ -43,41 +35,43 @@ export class Login extends Component {
     };
     this.props.loginUser(userData, this.props.history);
   }
-
   render() {
-    const { emailError, passwordError, notFoundUser } = this.state;
+    const { errors } = this.state;
     return (
       <section id="login" className="flex-grow-1">
         <div className="container" id="registration-container">
           <div className="row">
             <div className="header">
-              <h3 className="display-5 text-center">Welcome Fast Food Fast</h3>
+              <h3 className="display-5 text-center">Welcome To Fast Food Fast</h3>
               <form noValidate onSubmit={this.onSubmit}>
-                <span>{notFoundUser}</span>
                 <div className="form-group">
                   <input
                     type="email"
-                    className="form-control form-control-lg"
+                    className={classnames('form-control form-control-lg', {
+                      'is-invalid': errors.email
+                    })}
                     placeholder="Email Address"
                     name="email"
                     value={this.state.email}
                     onChange={this.onChange}
                   />
-                  {emailError && (
-                    <div className="invalid-feedback">{emailError}</div>
+                  {errors.email && (
+                    <div className="invalid-feedback">{errors.email}</div>
                   )}
                 </div>
                 <div className="form-group">
                   <input
                     type="password"
-                    className="form-control form-control-lg"
+                    className={classnames('form-control form-control-lg', {
+                      'is-invalid': errors.Password
+                    })}
                     placeholder="Password"
                     name="password"
                     value={this.state.password}
                     onChange={this.onChange}
                   />
-                  {passwordError && (
-                    <div className="invalid-feedback">{passwordError}</div>
+                  {errors.Password && (
+                    <div className="invalid-feedback">{errors.Password}</div>
                   )}
                 </div>
                 <input
@@ -92,9 +86,7 @@ export class Login extends Component {
             </div>
           </div>
         </div>
-        
       </section>
-      
     );
   }
 }
@@ -109,7 +101,6 @@ const mapStateToProps = state => {
     errors: state.errors
   };
 };
-
 export default connect(
   mapStateToProps,
   { loginUser }

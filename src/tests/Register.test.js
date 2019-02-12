@@ -20,6 +20,7 @@ describe('<Register/>', () => {
     instance.onChange({ target: { name: 'name', value: 'value' } });
     const e = { preventDefault: () => {} };
     instance.onSubmit(e);
+    expect(instance.state.name).toEqual('value')
   });
 
   it('tests that the component receives new props', () => {
